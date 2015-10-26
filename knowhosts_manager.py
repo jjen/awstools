@@ -1,4 +1,5 @@
 import shutil
+import os
 import sys
 import tempfile
 import datetime
@@ -27,7 +28,8 @@ def checked_key_scan(host):
     return output
 
 def update_knownhosts_file(host):
-    orig_file = '~/.ssh/known_hosts'
+    home_dir = os.path.expanduser("~")
+    orig_file = os.path.join(home_dir, ".ssh", "known_hosts")
     bak_file = orig_file + '.bak'
     host_exist = False
     temp = tempfile.NamedTemporaryFile(delete=False)
